@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Square from '../Square';
 
@@ -10,22 +11,18 @@ export const DIRECTIONS = {
 };
 
 export default function Snake() {
-  const [position, setPosition] = useState([
-    { x: 0, y: 0 },
-    { x: 10, y: 0 },
-    { x: 20, y: 0 },
-    { x: 30, y: 0 },
-    { x: 40, y: 0 },
-    { x: 50, y: 0 },
-  ]);
+  const snakePosition = useSelector(state => state.game.snakePosition);
+  const isSnakeRecovering = useSelector(state => state.game.isSnakeRecovering);
 
-  const [direction, setDirection] = useState(DIRECTIONS.right);
-
-  function move() {}
   return (
     <>
-      {position.map(pos => (
-        <Square x={pos.x} y={pos.y} />
+      {snakePosition.map(pos => (
+        <Square
+          key={`snake_${pos.x}_${pos.y}`}
+          x={pos.x}
+          y={pos.y}
+          opacity={isSnakeRecovering ? 0.6 : 1}
+        />
       ))}
     </>
   );

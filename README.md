@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## INSTRUCTIONS:
+
+To run this app you must install yarn in order to download its dependencies.
+If you alredy have it installed, simply navigate to this app's source code folder in a terminal, run the command 'yarn' and wait until everything is downloaded properly.
+Then, simply run the command 'yarn start' to start the project in development mode.
+This latest version of this project is available at https://github.com/torresrick/snake-game-react
+Have fun!
 
 ## Available Scripts
 
