@@ -11,7 +11,8 @@ function setupGame() {
       { x: 16, y: 400 },
       { x: 0, y: 400 },
     ],
-    direction: /* 39 */ 'right',
+    direction: 'right',
+    directionBuffer: /* 39 */ [],
     size: 4,
     screenSize: 800,
     delta: 0,
@@ -88,6 +89,10 @@ export default function game(state = INITIAL_STATE, action) {
           if (draft.delta > secondsPerFrame) {
             draft.delta -= secondsPerFrame;
             const speed = 16;
+            draft.direction = draft.directionBuffer.filter(newDir =>
+                newDir !== REVERSE_DIRECTION[draft.direction]
+              )[0] || draft.direction;
+              draft.directionBuffer = [];
             const nextPos = getNextPos(
               draft.snakePosition,
               draft.direction,
@@ -121,9 +126,7 @@ export default function game(state = INITIAL_STATE, action) {
         break;
       }
       case actions.CHANGE_DIRECTION: {
-        const newDir = action.payload.direction;
-        if (newDir !== REVERSE_DIRECTION[draft.direction])
-          draft.direction = action.payload.direction;
+        draft.directionBuffer.push(action.payload.direction);
         break;
       }
       case actions.GROW: {
